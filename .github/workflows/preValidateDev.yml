@@ -1,6 +1,6 @@
 
-name: Github By Matturi
-run-name: matturi is running the Github Actions 
+name: PREVALIDATE DEVSANDBOX
+run-name: matturi is running the Github Actions PRE-VALIDATE DEVSANDBOX
 ## This will run either on push, pull_request
 
 on:
