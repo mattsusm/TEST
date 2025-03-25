@@ -1,0 +1,44 @@
+
+name: Github By Matturi
+run-name: matturi is running the Github Actions 
+## This will run either on push, pull_request
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+    branches:
+        - develop
+    paths:
+        - 'force-app/**'
+
+jobs:
+  build-and-deploy: ## Name of the job
+    runs-on: ubuntu-latest ## Github Hosed [Self Hosted]
+    steps:
+       - name: my first job
+         run: echo "my First job"
+       - name: Checkout Code
+         uses: actions/checkout@v4.1.7
+         with:
+           fetch-depth: 0
+       - name: check
+         run: echo "Test"
+       - name: Install npm
+         run: npm install
+       - name: Install Salesforce CLI
+         run: npm install @salesforce/cli --global
+       - name: decrypt the server.key
+         run: openssl enc -nosalt -aes-256-cbc -d -in ${{secrets.ENCRYPTED_KEY_FILE}} -out ${{secrets.JWT_KEY_FILE}} -k ${{secrets.KEY}} -iv ${{secrets.IV}}
+       - name: authorize the org
+         run: sf org login jwt --username ${{secrets.SF_USERNAME}} --jwt-key-file ${{secrets.JWT_KEY_FILE}} --client-id ${{secrets.SF_CLIENT_ID}} --alias dev --set-default --instance-url ${{secrets.SF_INSTANCE_URL}}
+       - name: display user
+         run: sf org display user -o dev
+       - name: Deploy the code to salesforce
+         run: sf project deploy start --source-dir force-app --target-org dev
+  clean-up:
+    runs-on: ubuntu-latest
+    needs: [build-and-deploy]
+
+    steps:
+      - run: echo "This is my second job"
+        name: echo "This is my second job message"
