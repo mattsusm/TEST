@@ -5,7 +5,7 @@ run-name: matturi is running the Github Actions To DEPLOY TO DEV SANDBOX
 
 on:
   pull_request:
-    types: [opened, edited, reopened, synchronize]
+    types: [closed]
     branches:
         - develop
     paths:
