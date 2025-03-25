@@ -22,6 +22,6 @@ jobs:
        - name: Install Salesforce CLI
          run: npm install @salesforce/cli --global
        - name: authorize the org
-         run: sf org login web --set-default --alias dev --browser edge
+         run: sf org login web --set-default --alias dev --browser chrome
        - name: display user
          run: sf org display user -o dev
