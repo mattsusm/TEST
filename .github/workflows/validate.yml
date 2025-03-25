@@ -27,3 +27,12 @@ jobs:
          run: sf org login jwt --username sumatt1617-x7c2@force.com --jwt-key-file assets/server.key --client-id 3MVG9.Houp75EVdZbtmvt9EJCVQpsC.FLt11qeytB7HcudquekAQsWKiW7x3kKNohAUZC8w2AnQ7UfF5o2hzR --alias dev --set-default --instance-url https://login.salesforce.com
        - name: display user
          run: sf org display user -o dev
+       - name: Deploy the code to salesforce
+         run: sf project deploy start --source-dir force-app --target-org dev
+  clean-up:
+    runs-on: ubuntu-latest
+    needs: [build-and-deploy]
+
+    steps:
+      - run: echo "This is my second job"
+        name: echo "This is my second job message"
