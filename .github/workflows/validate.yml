@@ -9,7 +9,7 @@ jobs:
   build-and-deploy: ## Name of the job
     runs-on: ubuntu-latest ## Github Hosed [Self Hosted]
     steps:
-       - name: "Printing message"
+       - name: my first job
          run: echo "my First job"
        - name: Checkout Code
          uses: actions/checkout@v4.1.7
@@ -22,6 +22,6 @@ jobs:
        - name: Install Salesforce CLI
          run: npm install @salesforce/cli --global
        - name: authorize the org
-         run: sf org login web --set-default --alias dev --browser chrome
+         run: sf org login jwt --username sumatt1617-x7c2@force.com --jwt-key-file assets/server.key --client-id 3MVG9.Houp75EVdZbtmvt9EJCVQpsC.FLt11qeytB7HcudquekAQsWKiW7x3kKNohAUZC8w2AnQ7UfF5o2hzR --alias dev --set-default --instance-url https://login.salesforce.com
        - name: display user
          run: sf org display user -o dev
