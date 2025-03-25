@@ -14,6 +14,7 @@ on:
 jobs:
   build-and-deploy: ## Name of the job
     runs-on: ubuntu-latest ## Github Hosed [Self Hosted]
+    environment: dev
     steps:
        - name: my first job
          run: echo "my First job"
