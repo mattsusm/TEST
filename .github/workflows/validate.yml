@@ -3,7 +3,14 @@ name: Github By Matturi
 run-name: matturi is running the Github Actions 
 ## This will run either on push, pull_request
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+        - 'force-app/**'
+    branches: 
+        - feature/*
+        - bugfix/*
+        - hotfix/*
 
 jobs:
   build-and-deploy: ## Name of the job
