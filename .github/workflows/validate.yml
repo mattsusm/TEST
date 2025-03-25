@@ -34,8 +34,10 @@ jobs:
          run: sf org login jwt --username ${{secrets.SF_USERNAME}} --jwt-key-file ${{secrets.JWT_KEY_FILE}} --client-id ${{secrets.SF_CLIENT_ID}} --alias dev --set-default --instance-url ${{secrets.SF_INSTANCE_URL}}
        - name: display user
          run: sf org display user -o dev
-       - name: Deploy the code to salesforce
-         run: sf project deploy start --source-dir force-app --target-org dev
+      ## - name: Deploy the code to salesforce
+      ## run: sf project deploy start --source-dir force-app --target-org dev
+       - name: validate the code to salesforce
+         run: sf project deploy validate --source-dir force-app --target-org dev
   clean-up:
     runs-on: ubuntu-latest
     needs: [build-and-deploy]
